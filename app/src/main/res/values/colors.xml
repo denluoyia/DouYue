@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#313131</color>
+    <color name="colorPrimaryDark">#313131</color>
+    <color name="colorAccent">#ffcfab49</color>
+
+    <color name="colorAccentDark">#c4930b</color>
+
+    <color name="text_color_primary">#212121</color>
+    <color name="text_second_color_primary">#727272</color>
+
+    <color name="grey" >#ffbebebe</color>
+    <color name="grey_1">#9E9E9E</color>
+    <color name="dark_grey">#FF080808</color>
+    <color name="light_grey">#ffdedede</color>
+    <color name="light_grey_1">#FFEEEEEE</color>
+
+    <color name="drawer_scrim_color">#88EEEEEE</color>
+    <color name="toolbar_title_color">@android:color/white</color>
+    <color name="toolbar_bg_color">@android:color/black</color>
+    <color name="window_background">@android:color/white</color>
+    <color name="transparent">@android:color/transparent</color>
+    <color name="white">@android:color/white</color>
+    <color name="black">@android:color/black</color>
+
+    <color name="half_transparent">#80FFFFFF</color>
+    <color name="text_ccc">#CCCCCC</color>
+    <color name="text_aaa">#aaaaaa</color>
+    <color name="text_555">#555555</color>
+    <color name="divider">#DEDEDE</color>
+</resources>

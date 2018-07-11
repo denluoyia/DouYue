@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="?android:selectableItemBackground">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
+
+        <ImageView
+            android:id="@+id/iv_clock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/srch_ic_clock"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:layout_marginLeft="5dp"/>
+
+        <TextView
+            android:id="@+id/tv_search_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/iv_clock" />
+
+
+        <ImageView
+            android:id="@+id/iv_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/srch_ic_delete"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="?actionBarItemBackground"
+            android:padding="10dp"
+            android:layout_marginRight="5dp"/>
+
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="40dp"
+        android:background="@color/light_grey" />
+
+</LinearLayout>

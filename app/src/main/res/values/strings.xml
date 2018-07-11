@@ -1,0 +1,64 @@
+<resources>
+    <string name="app_name">DouYue</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+
+    <string name="search_input_hint">输入图书关键字</string>
+    <string name="search_hot">热门搜索</string>
+    <string name="search_history">搜索历史</string>
+
+    <array name="search_hots_array">
+        <item>放风筝的人</item>
+        <item>一个人的朝圣</item>
+        <item>解忧杂货店</item>
+        <item>摆渡人</item>
+        <item>你好，旧时光</item>
+        <item>浮生六记</item>
+        <item>皮囊</item>
+    </array>
+
+
+    <!--笔记部分-->
+    <string name="note_title">标题</string>
+    <string name="note_content">笔记内容</string>
+    <string name="before_minute" formatted="false">%d\u0020分钟之前</string>
+    <string name="before_hour" formatted="false">%d\u0020小时之前</string>
+    <string name="before_day" formatted="false">%d\u0020天之前</string>
+    <string name="before_month" formatted="false">%d\u0020个月之前</string>
+    <string name="before_year" formatted="false">%d\u0020年之前</string>
+
+
+    <array name="note_left_drawer_array">
+        <item>笔记录</item>
+        <item>回收站</item>
+    </array>
+
+    <string name="edit">编辑</string>
+    <string name="move_to_trash">回收站</string>
+
+    <string name="recover">恢复</string>
+    <string name="delete">删除</string>
+
+    <string name="newNote">新建笔记</string>
+    <string name="readNote">查看笔记</string>
+    <string name="editNote">编辑笔记</string>
+
+    <string name="note_edit_done">完成</string>
+
+
+    <array name="cllection_type_array">
+        <item>文字</item>
+        <item>声音</item>
+        <item>影像</item>
+        <item>图书</item>
+    </array>
+</resources>

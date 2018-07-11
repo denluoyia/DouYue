@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--通用itemTitle -->
+    <declare-styleable name="BaseItemTitleLayout">
+        <attr name="bit_left_icon" format="reference" />
+        <attr name="bit_left_icon_visible" format="boolean" />
+        <attr name="bit_left_text" format="string" />
+        <attr name="bit_left_text_size" format="integer" />
+        <attr name="bit_left_text_color" format="color" />
+        <attr name="bit_view_separate_visible" format="boolean" />
+        <attr name="bit_right_text" format="string" />
+        <attr name="bit_right_text_size" format="integer" />
+        <attr name="bit_right_text_color" format="color" />
+        <attr name="bit_right_text_location" format="enum">
+            <enum name="left" value="-1" />
+            <enum name="center" value="0" />
+            <enum name="right" value="1" />
+        </attr>
+        <attr name="bit_right_icon_visible" format="boolean" />
+        <attr name="bit_bottom_divider_visible" format="boolean" />
+    </declare-styleable>
+</resources>

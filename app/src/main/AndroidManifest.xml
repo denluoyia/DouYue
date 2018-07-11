@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.denluoyia.douyue">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application
+        android:name=".DouYueApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/app_logo"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/app_logo"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <!-- 启动页 -->
+        <activity
+            android:name=".view.activity.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullScreenTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 首页 -->
+        <activity
+            android:name=".view.activity.MainActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 搜索页 -->
+        <activity
+            android:name=".view.activity.SearchActivity"
+            android:launchMode="singleTop" />
+        <!-- Debug测试页 埋点测试 -->
+
+        <activity
+            android:name=".view.activity.DebugActivity"
+            android:launchMode="singleTop" />
+
+        <!-- 分类：文字 声音 影像 详情页 -->
+        <activity
+            android:name=".view.activity.ArticleDetailActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".view.activity.AudioDetailActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".view.activity.VideoDetailActivity"
+            android:launchMode="singleTop" />
+
+        <!--视频播放封装测试-->
+        <activity
+            android:name=".view.activity.VideoTestActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+        <!-- 图书详情页 -->
+        <activity android:name=".view.activity.BookDetailActivity"
+            android:launchMode="singleTop"/>
+
+        <!--我的笔记-->
+        <activity android:name=".view.activity.NoteActivity" />
+        <activity android:name=".view.activity.NoteEditActivity" />
+
+        <!--我的收藏-->
+        <activity android:name=".view.activity.MyCollectionActivity" />
+        <activity android:name=".view.activity.CommonWebActivity" />
+
+        <!-- 音频播放服务 -->
+        <service android:name=".manager.audioplayer.AudioPlayService">
+            <intent-filter>
+                <action android:name="com.denluoyia.douyue.Audio" />
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>

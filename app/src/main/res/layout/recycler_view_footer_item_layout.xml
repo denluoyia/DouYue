@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ProgressBar
+        android:id="@+id/pb_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tv_no_more_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#aaaaaa"
+        android:text="~我是有底线的~"
+        android:visibility="gone"
+        android:padding="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_error_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#aaaaaa"
+        android:text="~加载出错，点击重试~"
+        android:visibility="gone"
+        android:padding="10dp"/>
+
+</LinearLayout>

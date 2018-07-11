@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="2dp"
+    android:layout_margin="8dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/note_title"
+                android:layout_width="364dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:paddingBottom="4dp"
+                android:paddingLeft="6dp"
+                android:paddingTop="6dp"
+                android:text="标题"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <ImageButton
+                android:id="@+id/note_op"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="6dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:src="@mipmap/ic_more_grey" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/note_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="6dp"
+            android:maxLines="15"
+            android:lineSpacingExtra="2dp"
+            android:text="内容"
+            android:textColor="#413f3f"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/note_last_edit_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="6dp"
+            tools:text="2015-5-24:16:05"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textColor="#666666"
+            android:textSize="12sp"/>
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

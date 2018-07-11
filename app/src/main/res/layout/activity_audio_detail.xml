@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="@color/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <ImageView
+                android:id="@+id/iv_top"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:background="?android:selectableItemBackground"/>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+                <ProgressBar
+                    android:id="@+id/hint_progress_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
+
+                <ImageView
+                    android:id="@+id/btn_init_play"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/play_btn_play" />
+            </FrameLayout>
+
+
+            <LinearLayout
+                android:id="@+id/seek_bar_bottom_tip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:layout_gravity="bottom"
+                android:orientation="vertical"
+                android:background="#30FFFFFF"
+                android:visibility="gone">
+
+                <SeekBar
+                    android:id="@+id/seek_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp">
+                    <TextView
+                        android:id="@+id/time_play_curr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/time_play_total"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_horizontal">
+                    <!--后退-->
+                    <ImageView
+                        android:id="@+id/btn_play_prev"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/play_btn_prev"/>
+                    <!--暂停/播放-->
+                    <ImageView
+                        android:id="@+id/btn_play_or_pause"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/play_btn_pause"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"/>
+                    <!--快进-->
+                    <ImageView
+                        android:id="@+id/btn_play_next"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/play_btn_next"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                app:layout_collapseMode="pin"
+                app:navigationIcon="@mipmap/ic_back"
+                app:popupTheme="@style/AppTheme.PopupOverlay">
+
+                <ImageView
+                    android:id="@+id/iv_share"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_share"
+                    android:layout_gravity="end|center_vertical"
+                    android:layout_marginRight="20dp"
+                    android:background="?actionBarItemBackground"/>
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <include layout="@layout/layout_detail_bottom_content" />
+
+</android.support.design.widget.CoordinatorLayout>

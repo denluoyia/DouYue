@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.denluoyia.douyue.widget.RippleLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.activity.SearchActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        app:navigationIcon="@mipmap/ic_back"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        android:background="@color/colorPrimary">
+
+        <com.denluoyia.douyue.widget.ClearEditText
+            android:id="@+id/cet_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:textColor="@color/white"
+            android:maxLines="1"
+            android:hint="@string/search_input_hint"
+            android:textColorHint="@color/text_second_color_primary" />
+    </android.support.v7.widget.Toolbar>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/layout_normal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.denluoyia.douyue.widget.itemtitle.CommonItemTitle
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:bit_left_text="@string/search_hot">
+                </com.denluoyia.douyue.widget.itemtitle.CommonItemTitle>
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view_hots"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </android.support.v7.widget.RecyclerView>
+
+
+                <com.denluoyia.douyue.widget.itemtitle.CommonItemTitle
+                    android:id="@+id/item_search_history"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:bit_left_text="@string/search_history"
+                    android:layout_marginTop="20dp">
+                </com.denluoyia.douyue.widget.itemtitle.CommonItemTitle>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view_history"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </android.support.v7.widget.RecyclerView>
+
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+        <FrameLayout
+            android:id="@+id/layout_search_result"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:visibility="gone"
+            android:gravity="center">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_search_result"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </android.support.v7.widget.RecyclerView>
+
+            <TextView
+                android:id="@+id/tv_search_result_tip"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:padding="15dp"
+                android:visibility="gone"/>
+        </FrameLayout>
+
+
+    </FrameLayout>
+
+
+</com.denluoyia.douyue.widget.RippleLayout>

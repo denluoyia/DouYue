@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/titlebar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_toggle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@mipmap/ic_menu"
+                android:layout_centerVertical="true"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp" />
+
+            <com.denluoyia.douyue.widget.MainTitleTabView
+                android:id="@+id/main_tab_title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true">
+            </com.denluoyia.douyue.widget.MainTitleTabView>
+
+            <ImageView
+                android:id="@+id/ic_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_search"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="20dp"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>
