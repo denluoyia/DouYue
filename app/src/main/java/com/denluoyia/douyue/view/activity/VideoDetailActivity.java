@@ -11,6 +11,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.bumptech.glide.Glide;
@@ -46,6 +47,8 @@ public class VideoDetailActivity extends BaseActivity {
     TextView author;
     @BindView(R.id.web_view)
     WebView webView;
+    @BindView(R.id.iv_collect)
+    ImageView ivCollect;
 
     private String postId;
     private ItemListBean.ListBean item;
@@ -67,12 +70,13 @@ public class VideoDetailActivity extends BaseActivity {
         videoUrl = item.getVideo();
         initToolbar(mToolbar);
         Glide.with(this).load(item.getThumbnail()).into(imageViewTop);
+        ivCollect.setBackgroundResource(MyCollectionDaoManager.isCollectionExists(postId) ? R.mipmap.ic_collection : R.mipmap.ic_un_collection);
         WebViewSetting.initWebSetting(webView);
         collectionUrl = WebViewSetting.addParams2DetailUrl(this, item.getHtml5(), true);
         webView.loadUrl(collectionUrl);
     }
 
-    @OnClick({R.id.btn_init_play, R.id.iv_share})
+    @OnClick({R.id.btn_init_play, R.id.iv_collect})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.btn_init_play:
@@ -94,13 +98,22 @@ public class VideoDetailActivity extends BaseActivity {
                 }
                 startPlay();
                 break;
-            case R.id.iv_share:
+            case R.id.iv_collect:
+                if (MyCollectionDaoManager.isCollectionExists(postId)){
+                    ivCollect.setBackgroundResource(R.mipmap.ic_un_collection);
+                    MyCollectionDaoManager.deleteById(postId);
+                    Toast.makeText(this, "取消收藏成功", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 MyCollectionBean bean = new MyCollectionBean();
                 bean.setCollectionId(postId);
                 bean.setCollectionType(Constant.MY_COLLECTION_TYPE_VIDEO);
                 bean.setTitle(item.getTitle());
                 bean.setUrl(collectionUrl);
                 MyCollectionDaoManager.insert(bean);
+                ivCollect.setBackgroundResource(R.mipmap.ic_collection);
+                Toast.makeText(this, "收藏成功", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

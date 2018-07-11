@@ -24,6 +24,7 @@ import com.denluoyia.douyue.model.ItemListBean;
 import com.denluoyia.douyue.model.db.MyCollectionBean;
 import com.denluoyia.douyue.presenter.DetailContract;
 import com.denluoyia.douyue.utils.LogUtil;
+import com.denluoyia.douyue.utils.UIUtil;
 import com.denluoyia.douyue.utils.WebViewSetting;
 
 import org.jsoup.Jsoup;
@@ -48,6 +49,8 @@ public class ArticleDetailActivity extends BaseActivity implements DetailContrac
     TextView author;
     @BindView(R.id.web_view)
     WebView webView;
+    @BindView(R.id.iv_collect)
+    ImageView ivCollect;
 
     private ItemListBean.ListBean item;
     private String postId;
@@ -69,6 +72,7 @@ public class ArticleDetailActivity extends BaseActivity implements DetailContrac
         updateTime.setText(item.getUpdate_time());
         title.setText(item.getTitle());
         author.setText(item.getAuthor());
+        ivCollect.setBackgroundResource(MyCollectionDaoManager.isCollectionExists(postId) ? R.mipmap.ic_collection : R.mipmap.ic_un_collection);
         WebViewSetting.initWebSetting(webView);
         collectionUrl = WebViewSetting.addParams2DetailUrl(this, item.getHtml5(), false);
         webView.setVisibility(View.GONE);
@@ -88,6 +92,12 @@ public class ArticleDetailActivity extends BaseActivity implements DetailContrac
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
                 return true;
+            }
+
+            @Override
+            public void onLoadResource(WebView view, String url) {
+                super.onLoadResource(view, url);
+
             }
 
             @Override
@@ -146,16 +156,26 @@ public class ArticleDetailActivity extends BaseActivity implements DetailContrac
     }
 
 
-    @OnClick({R.id.iv_share})
+    @OnClick({R.id.iv_collect})
     public void onClick(View view){
         switch (view.getId()){
-            case R.id.iv_share:
+            case R.id.iv_collect:
+                if (MyCollectionDaoManager.isCollectionExists(postId)){
+                    ivCollect.setBackgroundResource(R.mipmap.ic_un_collection);
+                    MyCollectionDaoManager.deleteById(postId);
+                    Toast.makeText(this, "取消收藏成功", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 MyCollectionBean bean = new MyCollectionBean();
                 bean.setCollectionId(postId);
                 bean.setCollectionType(Constant.MY_COLLECTION_TYPE_TEXT);
                 bean.setTitle(item.getTitle());
                 bean.setUrl(collectionUrl);
+
                 MyCollectionDaoManager.insert(bean);
+                ivCollect.setBackgroundResource(R.mipmap.ic_collection);
+                Toast.makeText(this, "收藏成功", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

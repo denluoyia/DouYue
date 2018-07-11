@@ -27,6 +27,16 @@ public class MyCollectionDaoManager {
     }
 
     /**
+     *删除笔记
+     */
+    public static void deleteById(String id){
+        List<MyCollectionBean> list = DouYueApp.getDaoSession().getMyCollectionBeanDao().queryBuilder().where(MyCollectionBeanDao.Properties.CollectionId.eq(id)).list();
+        if (list != null && list.size() > 0){
+            DouYueApp.getDaoSession().getMyCollectionBeanDao().deleteByKey(list.get(0).getId());
+        }
+    }
+
+    /**
      *更新笔记
      */
     public static void update(MyCollectionBean bean){
@@ -41,8 +51,12 @@ public class MyCollectionDaoManager {
     }
 
     /**分页进行加载 降序查询 每页10条数据*/
-    public List<MyCollectionBean> getDataByPageOffset(int page){
+    public static List<MyCollectionBean> getDataByPageOffset(int page){
         return DouYueApp.getDaoSession().getMyCollectionBeanDao().queryBuilder().orderDesc(MyCollectionBeanDao.Properties.Id).offset((page-1) * 10).limit(10).list();
+    }
+
+    public static boolean isCollectionExists(String id){
+        return DouYueApp.getDaoSession().getMyCollectionBeanDao().queryBuilder().where(MyCollectionBeanDao.Properties.CollectionId.eq(id)).list().size() > 0;
     }
 
 }

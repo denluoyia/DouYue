@@ -122,10 +122,10 @@
                     android:id="@+id/iv_share"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_share"
+                    android:src="@mipmap/ic_un_collection"
                     android:layout_gravity="end|center_vertical"
                     android:layout_marginRight="20dp"
-                    android:background="?actionBarItemBackground"/>
+                    android:background="?android:actionBarItemBackground"/>
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.CollapsingToolbarLayout>
 

@@ -66,6 +66,8 @@ public class AudioDetailActivity extends BaseActivity implements DetailContract.
     TextView author;
     @BindView(R.id.web_view)
     WebView webView;
+    @BindView(R.id.iv_collect)
+    ImageView ivCollect;
 
     private AudioPlayService mAudioPlayService;
     private ItemListBean.ListBean item;
@@ -103,6 +105,7 @@ public class AudioDetailActivity extends BaseActivity implements DetailContract.
         updateTime.setText(item.getUpdate_time());
         title.setText(item.getTitle());
         author.setText(item.getAuthor());
+        ivCollect.setBackgroundResource(MyCollectionDaoManager.isCollectionExists(item.getId()) ? R.mipmap.ic_collection : R.mipmap.ic_un_collection);
 
         WebViewSetting.initWebSetting(webView);
         collectionUrl = WebViewSetting.addParams2DetailUrl(this, item.getHtml5(), false);
@@ -117,7 +120,7 @@ public class AudioDetailActivity extends BaseActivity implements DetailContract.
     }
 
 
-    @OnClick({R.id.btn_init_play, R.id.btn_play_or_pause, R.id.btn_play_next, R.id.btn_play_prev, R.id.iv_share})
+    @OnClick({R.id.btn_init_play, R.id.btn_play_or_pause, R.id.btn_play_next, R.id.btn_play_prev, R.id.iv_collect})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.btn_init_play:
@@ -152,12 +155,21 @@ public class AudioDetailActivity extends BaseActivity implements DetailContract.
                 break;
 
             case R.id.iv_share:
+                if (MyCollectionDaoManager.isCollectionExists(item.getId())){
+                    ivCollect.setBackgroundResource(R.mipmap.ic_un_collection);
+                    MyCollectionDaoManager.deleteById(item.getId());
+                    Toast.makeText(this, "取消收藏成功", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 MyCollectionBean bean = new MyCollectionBean();
                 bean.setCollectionId(item.getId());
                 bean.setCollectionType(Constant.MY_COLLECTION_TYPE_AUDIO);
                 bean.setTitle(item.getTitle());
                 bean.setUrl(collectionUrl);
                 MyCollectionDaoManager.insert(bean);
+                ivCollect.setBackgroundResource(R.mipmap.ic_collection);
+                Toast.makeText(this, "收藏成功", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
