@@ -154,7 +154,7 @@ public class AudioDetailActivity extends BaseActivity implements DetailContract.
                 mAudioPlayService.seekTo(newCurrTime2 > mAudioPlayService.getDuration() ? mAudioPlayService.getDuration() : newCurrTime2);
                 break;
 
-            case R.id.iv_share:
+            case R.id.iv_collect:
                 if (MyCollectionDaoManager.isCollectionExists(item.getId())){
                     ivCollect.setBackgroundResource(R.mipmap.ic_un_collection);
                     MyCollectionDaoManager.deleteById(item.getId());

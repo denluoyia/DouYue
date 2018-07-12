@@ -83,7 +83,7 @@ public abstract class BaseRecyclerViewAdapter<T, VHH extends BaseItemViewHolder>
     private View.OnLongClickListener mInnerLongClickListener = new View.OnLongClickListener() {
         @Override
         public boolean onLongClick(View v) {
-            int position = (int) v.getTag();
+            int position = (int) v.getTag(v.getId());
             return getItem(position) == null || onItemLongClickListener(v, position);
         }
     };

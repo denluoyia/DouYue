@@ -119,7 +119,7 @@
                 app:popupTheme="@style/AppTheme.PopupOverlay">
 
                 <ImageView
-                    android:id="@+id/iv_share"
+                    android:id="@+id/iv_collect"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/ic_un_collection"
