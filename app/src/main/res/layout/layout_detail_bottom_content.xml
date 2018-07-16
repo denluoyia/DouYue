@@ -16,15 +16,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="visible"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="15dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
+                android:layout_marginBottom="15dp">
 
                 <TextView
                     android:id="@+id/detail_type"
@@ -49,20 +49,33 @@
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_second_color_primary"
+                android:textColor="@color/text_color_primary"
                 android:textSize="18sp"
-                android:text="我在等风也在等你"
-                android:layout_margin="20dp"/>
+                android:text="我在等风也在等你" />
 
 
             <TextView
                 android:id="@+id/author"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_second_color_primary"
-                android:textSize="15sp"
+                android:textColor="@color/text_555"
+                android:textSize="13sp"
                 android:text="莉莉安"
-                android:layout_margin="20dp"/>
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:id="@+id/detail_lead_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="4dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:textSize="15sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:background="@color/text_ccc" />
         </LinearLayout>
 
         <FrameLayout
@@ -73,7 +86,19 @@
             <WebView
                 android:id="@+id/web_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
+            <LinearLayout
+                android:id="@+id/detail_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="30dp">
+            </LinearLayout>
+
         </FrameLayout>
 
     </LinearLayout>

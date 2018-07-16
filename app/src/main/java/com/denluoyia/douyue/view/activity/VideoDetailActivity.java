@@ -9,6 +9,7 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,18 +20,24 @@ import com.denluoyia.douyue.R;
 import com.denluoyia.douyue.base.BaseActivity;
 import com.denluoyia.douyue.constant.Constant;
 import com.denluoyia.douyue.manager.db.greendao.MyCollectionDaoManager;
+import com.denluoyia.douyue.model.DetailBean;
 import com.denluoyia.douyue.model.ItemListBean;
 import com.denluoyia.douyue.model.db.MyCollectionBean;
+import com.denluoyia.douyue.presenter.DetailContract;
+import com.denluoyia.douyue.presenter.DetailPresenter;
+import com.denluoyia.douyue.utils.HtmlParseUtil;
 import com.denluoyia.douyue.utils.NetworkUtil;
 import com.denluoyia.douyue.utils.WebViewSetting;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class VideoDetailActivity extends BaseActivity {
+public class VideoDetailActivity extends BaseActivity implements DetailContract.View{
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
+    @BindView(R.id.iv_collect)
+    ImageView ivCollect;
     @BindView(R.id.iv_top)
     ImageView imageViewTop;
     @BindView(R.id.video_view)
@@ -45,13 +52,17 @@ public class VideoDetailActivity extends BaseActivity {
     TextView title;
     @BindView(R.id.author)
     TextView author;
+    @BindView(R.id.detail_lead_text)
+    TextView leadText;
     @BindView(R.id.web_view)
     WebView webView;
-    @BindView(R.id.iv_collect)
-    ImageView ivCollect;
+    @BindView(R.id.detail_content)
+    LinearLayout llDetailContent;
 
     private String postId;
     private ItemListBean.ListBean item;
+    private DetailPresenter mPresenter;
+    private HtmlParseUtil mHtmlParseUtil;
 
     @Override
     protected int setContentViewId() {
@@ -71,9 +82,10 @@ public class VideoDetailActivity extends BaseActivity {
         initToolbar(mToolbar);
         Glide.with(this).load(item.getThumbnail()).into(imageViewTop);
         ivCollect.setBackgroundResource(MyCollectionDaoManager.isCollectionExists(postId) ? R.mipmap.ic_collection : R.mipmap.ic_un_collection);
-        WebViewSetting.initWebSetting(webView);
         collectionUrl = WebViewSetting.addParams2DetailUrl(this, item.getHtml5(), true);
-        webView.loadUrl(collectionUrl);
+        mHtmlParseUtil = new HtmlParseUtil(this);
+        mPresenter = new DetailPresenter(this);
+        mPresenter.loadData(postId);
     }
 
     @OnClick({R.id.btn_init_play, R.id.iv_collect})
@@ -136,5 +148,25 @@ public class VideoDetailActivity extends BaseActivity {
     public void finish() {
         super.finish();
         overridePendingTransition(0, R.anim.translate_bottom_out);
+    }
+
+    @Override
+    public void loadDataSuccess(DetailBean bean) {
+        if (bean.getDatas().getParseXML() == 1){
+            updateTime.setText(bean.getDatas().getUpdate_time());
+            title.setText(bean.getDatas().getTitle());
+            author.setText(bean.getDatas().getAuthor());
+            leadText.setText(bean.getDatas().getLead());
+            mHtmlParseUtil.loadHtml(bean.getDatas().getContent(), HtmlParseUtil.HtmlType.STRING, llDetailContent);
+        }else{
+            webView.setVisibility(View.VISIBLE);
+            WebViewSetting.initWebSetting(webView);
+            webView.loadUrl(collectionUrl);
+        }
+    }
+
+    @Override
+    public void loadDataFailed(String msg) {
+
     }
 }

@@ -1,11 +1,9 @@
 package com.denluoyia.douyue.presenter;
 
-import com.denluoyia.douyue.constant.URLConstant;
 import com.denluoyia.douyue.manager.net.IRequestCallback;
 import com.denluoyia.douyue.manager.net.NetManager;
 import com.denluoyia.douyue.model.DetailBean;
 
-import java.io.IOException;
 import java.util.LinkedHashMap;
 
 /**
@@ -23,8 +21,8 @@ public class DetailPresenter implements DetailContract.Presenter {
     @Override
     public void loadData(String postId) {
         LinkedHashMap<String, String> params = new LinkedHashMap<>();
-        //params.put("post_id", postId);
-        NetManager.get("http://static.owspace.com/?c=api&a=getPost&show_sdv=1&post_id=295138", params, new IRequestCallback<DetailBean>() {
+        params.put("post_id", postId);
+        NetManager.get("http://static.owspace.com/?c=api&a=getPost&show_sdv=1&", params, new IRequestCallback<DetailBean>() {
             @Override
             public void onFailure(Exception e) {
                 mView.loadDataFailed(e == null ? null : e.getMessage());

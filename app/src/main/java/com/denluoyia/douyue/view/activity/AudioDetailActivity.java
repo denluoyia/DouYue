@@ -28,6 +28,8 @@ import com.denluoyia.douyue.model.DetailBean;
 import com.denluoyia.douyue.model.ItemListBean;
 import com.denluoyia.douyue.model.db.MyCollectionBean;
 import com.denluoyia.douyue.presenter.DetailContract;
+import com.denluoyia.douyue.presenter.DetailPresenter;
+import com.denluoyia.douyue.utils.HtmlParseUtil;
 import com.denluoyia.douyue.utils.NetworkUtil;
 import com.denluoyia.douyue.utils.TimeUtil;
 import com.denluoyia.douyue.utils.UIUtil;
@@ -41,6 +43,8 @@ public class AudioDetailActivity extends BaseActivity implements DetailContract.
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
+    @BindView(R.id.iv_collect)
+    ImageView ivCollect;
     @BindView(R.id.iv_top)
     ImageView imageViewTop;
     @BindView(R.id.btn_init_play)
@@ -64,14 +68,18 @@ public class AudioDetailActivity extends BaseActivity implements DetailContract.
     TextView title;
     @BindView(R.id.author)
     TextView author;
+    @BindView(R.id.detail_lead_text)
+    TextView leadText;
     @BindView(R.id.web_view)
     WebView webView;
-    @BindView(R.id.iv_collect)
-    ImageView ivCollect;
+    @BindView(R.id.detail_content)
+    LinearLayout llDetailContent;
 
     private AudioPlayService mAudioPlayService;
     private ItemListBean.ListBean item;
     private String collectionUrl;
+    private DetailPresenter mPresenter;
+    private HtmlParseUtil mHtmlParseUtil;
 
     private ServiceConnection connection = new ServiceConnection() {
         @Override
@@ -101,15 +109,10 @@ public class AudioDetailActivity extends BaseActivity implements DetailContract.
         initToolbar(mToolbar);
         Glide.with(this).load(item.getThumbnail()).into(imageViewTop);
         bindAudioPlayService();
-
-        updateTime.setText(item.getUpdate_time());
-        title.setText(item.getTitle());
-        author.setText(item.getAuthor());
         ivCollect.setBackgroundResource(MyCollectionDaoManager.isCollectionExists(item.getId()) ? R.mipmap.ic_collection : R.mipmap.ic_un_collection);
-
-        WebViewSetting.initWebSetting(webView);
-        collectionUrl = WebViewSetting.addParams2DetailUrl(this, item.getHtml5(), false);
-        webView.loadUrl(collectionUrl);
+        mHtmlParseUtil = new HtmlParseUtil(this);
+        mPresenter = new DetailPresenter(this);
+        mPresenter.loadData(item.getId());
     }
 
 
@@ -138,7 +141,9 @@ public class AudioDetailActivity extends BaseActivity implements DetailContract.
                             dialog.dismiss();
                         }
                     }).create().show();
+                    return;
                 }
+                startPlay();
                 break;
 
             case R.id.btn_play_or_pause:
@@ -188,7 +193,18 @@ public class AudioDetailActivity extends BaseActivity implements DetailContract.
 
     @Override
     public void loadDataSuccess(DetailBean bean) {
-
+        if (bean.getDatas().getParseXML() == 1){
+            updateTime.setText(bean.getDatas().getUpdate_time());
+            title.setText(bean.getDatas().getTitle());
+            author.setText(bean.getDatas().getAuthor());
+            leadText.setText(bean.getDatas().getLead());
+            mHtmlParseUtil.loadHtml(bean.getDatas().getContent(), HtmlParseUtil.HtmlType.STRING, llDetailContent);
+        }else{
+            webView.setVisibility(View.VISIBLE);
+            WebViewSetting.initWebSetting(webView);
+            collectionUrl = WebViewSetting.addParams2DetailUrl(this, item.getHtml5(), false);
+            webView.loadUrl(collectionUrl);
+        }
     }
 
     @Override

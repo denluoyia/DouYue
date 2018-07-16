@@ -11,6 +11,7 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,8 +24,9 @@ import com.denluoyia.douyue.model.DetailBean;
 import com.denluoyia.douyue.model.ItemListBean;
 import com.denluoyia.douyue.model.db.MyCollectionBean;
 import com.denluoyia.douyue.presenter.DetailContract;
+import com.denluoyia.douyue.presenter.DetailPresenter;
+import com.denluoyia.douyue.utils.HtmlParseUtil;
 import com.denluoyia.douyue.utils.LogUtil;
-import com.denluoyia.douyue.utils.UIUtil;
 import com.denluoyia.douyue.utils.WebViewSetting;
 
 import org.jsoup.Jsoup;
@@ -39,6 +41,8 @@ public class ArticleDetailActivity extends BaseActivity implements DetailContrac
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
+    @BindView(R.id.iv_collect)
+    ImageView ivCollect;
     @BindView(R.id.iv_top)
     ImageView imageViewTop;
     @BindView(R.id.update_time)
@@ -47,14 +51,18 @@ public class ArticleDetailActivity extends BaseActivity implements DetailContrac
     TextView title;
     @BindView(R.id.author)
     TextView author;
+    @BindView(R.id.detail_lead_text)
+    TextView leadText;
     @BindView(R.id.web_view)
     WebView webView;
-    @BindView(R.id.iv_collect)
-    ImageView ivCollect;
+    @BindView(R.id.detail_content)
+    LinearLayout llDetailContent;
 
     private ItemListBean.ListBean item;
     private String postId;
     private String collectionUrl;
+    private DetailPresenter mPresenter;
+    private HtmlParseUtil mHtmlParseUtil;
 
     @Override
     protected int setContentViewId() {
@@ -73,10 +81,10 @@ public class ArticleDetailActivity extends BaseActivity implements DetailContrac
         title.setText(item.getTitle());
         author.setText(item.getAuthor());
         ivCollect.setBackgroundResource(MyCollectionDaoManager.isCollectionExists(postId) ? R.mipmap.ic_collection : R.mipmap.ic_un_collection);
-        WebViewSetting.initWebSetting(webView);
         collectionUrl = WebViewSetting.addParams2DetailUrl(this, item.getHtml5(), false);
-        webView.setVisibility(View.GONE);
-        initWebSetting();
+        mHtmlParseUtil = new HtmlParseUtil(this);
+        mPresenter = new DetailPresenter(this);
+        mPresenter.loadData(postId);
     }
 
     @SuppressLint("JavascriptInterface")
@@ -102,7 +110,6 @@ public class ArticleDetailActivity extends BaseActivity implements DetailContrac
 
             @Override
             public void onPageFinished(WebView view, String url) {
-                //super.onPageFinished(view, url);
                 if (webView.getVisibility() != View.VISIBLE){
                     view.loadUrl("javascript:window.localObj.hideArticleCover("
                             + "document.getElementsByTagName('html')[0].innerHTML)");
@@ -145,7 +152,16 @@ public class ArticleDetailActivity extends BaseActivity implements DetailContrac
 
     @Override
     public void loadDataSuccess(DetailBean bean) {
-
+        if (bean.getDatas().getParseXML() == 1){
+            updateTime.setText(bean.getDatas().getUpdate_time());
+            title.setText(bean.getDatas().getTitle());
+            author.setText(bean.getDatas().getAuthor());
+            leadText.setText(bean.getDatas().getLead());
+            mHtmlParseUtil.loadHtml(bean.getDatas().getContent(), HtmlParseUtil.HtmlType.STRING, llDetailContent);
+        }else {
+            WebViewSetting.initWebSetting(webView);
+            initWebSetting();
+        }
     }
 
     @Override
