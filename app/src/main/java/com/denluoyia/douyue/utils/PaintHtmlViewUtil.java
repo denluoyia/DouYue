@@ -2,6 +2,7 @@ package com.denluoyia.douyue.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
@@ -16,6 +17,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.denluoyia.douyue.R;
+import com.denluoyia.douyue.view.activity.ImageBrowseActivity;
+
+import java.util.ArrayList;
 
 /**
  * Created by denluoyia
@@ -30,9 +34,11 @@ public class PaintHtmlViewUtil {
     private LinearLayout.LayoutParams llParam;
     private View lineView;
     private Typeface typeface;
+    private ArrayList<String> imageUrls = new ArrayList<>();
+    private Context mContext;
 
     public PaintHtmlViewUtil(Context context){
-
+        this.mContext = context;
     }
 
     private LinearLayout.LayoutParams getLinearParams(){
@@ -90,6 +96,9 @@ public class PaintHtmlViewUtil {
             this.llParam.height = (this.imgHeight * ScreenUtil.getScreenWidth(paramActivity) / this.imgWidth);
         }
         localImageView.setLayoutParams(this.llParam);
+        localImageView.setTag(localImageView.getId(), imgUrl);
+        imageUrls.add(imgUrl);
+        localImageView.setOnClickListener(mOnImageClickListener);
         paramViewGroup.addView(localImageView);
         Glide.with(paramActivity).load(imgUrl).into(localImageView);
     }
@@ -99,4 +108,15 @@ public class PaintHtmlViewUtil {
         this.llParam = getLinearParams();
         paramViewGroup.addView(this.lineView);
     }
+
+    private View.OnClickListener mOnImageClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent();
+            intent.putStringArrayListExtra("imageUrls", imageUrls);
+            intent.putExtra("currImage", (String)v.getTag(v.getId()));
+            intent.setClass(mContext, ImageBrowseActivity.class);
+            mContext.startActivity(intent);
+        }
+    };
 }

@@ -109,7 +109,8 @@ public class AudioDetailActivity extends BaseActivity implements DetailContract.
         initToolbar(mToolbar);
         Glide.with(this).load(item.getThumbnail()).into(imageViewTop);
         bindAudioPlayService();
-        ivCollect.setBackgroundResource(MyCollectionDaoManager.isCollectionExists(item.getId()) ? R.mipmap.ic_collection : R.mipmap.ic_un_collection);
+        collectionUrl = WebViewSetting.addParams2DetailUrl(this, item.getHtml5(), false);
+        ivCollect.setBackgroundResource(MyCollectionDaoManager.isCollectionExists(item.getId()) ? R.mipmap.ic_collection_selected : R.mipmap.ic_collection_un_selected);
         mHtmlParseUtil = new HtmlParseUtil(this);
         mPresenter = new DetailPresenter(this);
         mPresenter.loadData(item.getId());
@@ -161,7 +162,7 @@ public class AudioDetailActivity extends BaseActivity implements DetailContract.
 
             case R.id.iv_collect:
                 if (MyCollectionDaoManager.isCollectionExists(item.getId())){
-                    ivCollect.setBackgroundResource(R.mipmap.ic_un_collection);
+                    ivCollect.setBackgroundResource(R.mipmap.ic_collection_un_selected);
                     MyCollectionDaoManager.deleteById(item.getId());
                     Toast.makeText(this, "取消收藏成功", Toast.LENGTH_SHORT).show();
                     return;
@@ -173,7 +174,7 @@ public class AudioDetailActivity extends BaseActivity implements DetailContract.
                 bean.setTitle(item.getTitle());
                 bean.setUrl(collectionUrl);
                 MyCollectionDaoManager.insert(bean);
-                ivCollect.setBackgroundResource(R.mipmap.ic_collection);
+                ivCollect.setBackgroundResource(R.mipmap.ic_collection_selected);
                 Toast.makeText(this, "收藏成功", Toast.LENGTH_SHORT).show();
                 break;
         }
@@ -202,7 +203,6 @@ public class AudioDetailActivity extends BaseActivity implements DetailContract.
         }else{
             webView.setVisibility(View.VISIBLE);
             WebViewSetting.initWebSetting(webView);
-            collectionUrl = WebViewSetting.addParams2DetailUrl(this, item.getHtml5(), false);
             webView.loadUrl(collectionUrl);
         }
     }

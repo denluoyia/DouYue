@@ -81,8 +81,8 @@ public class VideoDetailActivity extends BaseActivity implements DetailContract.
         videoUrl = item.getVideo();
         initToolbar(mToolbar);
         Glide.with(this).load(item.getThumbnail()).into(imageViewTop);
-        ivCollect.setBackgroundResource(MyCollectionDaoManager.isCollectionExists(postId) ? R.mipmap.ic_collection : R.mipmap.ic_un_collection);
         collectionUrl = WebViewSetting.addParams2DetailUrl(this, item.getHtml5(), true);
+        ivCollect.setBackgroundResource(MyCollectionDaoManager.isCollectionExists(postId) ? R.mipmap.ic_collection_selected : R.mipmap.ic_collection_un_selected);
         mHtmlParseUtil = new HtmlParseUtil(this);
         mPresenter = new DetailPresenter(this);
         mPresenter.loadData(postId);
@@ -112,7 +112,7 @@ public class VideoDetailActivity extends BaseActivity implements DetailContract.
                 break;
             case R.id.iv_collect:
                 if (MyCollectionDaoManager.isCollectionExists(postId)){
-                    ivCollect.setBackgroundResource(R.mipmap.ic_un_collection);
+                    ivCollect.setBackgroundResource(R.mipmap.ic_collection_un_selected);
                     MyCollectionDaoManager.deleteById(postId);
                     Toast.makeText(this, "取消收藏成功", Toast.LENGTH_SHORT).show();
                     return;
@@ -124,7 +124,7 @@ public class VideoDetailActivity extends BaseActivity implements DetailContract.
                 bean.setTitle(item.getTitle());
                 bean.setUrl(collectionUrl);
                 MyCollectionDaoManager.insert(bean);
-                ivCollect.setBackgroundResource(R.mipmap.ic_collection);
+                ivCollect.setBackgroundResource(R.mipmap.ic_collection_selected);
                 Toast.makeText(this, "收藏成功", Toast.LENGTH_SHORT).show();
                 break;
         }

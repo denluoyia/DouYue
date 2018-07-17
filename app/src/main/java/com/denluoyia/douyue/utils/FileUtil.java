@@ -47,6 +47,24 @@ public class FileUtil {
 
 
     /**
+     * 复制文件
+     * @param fromFile 源文件
+     * @param toFile   目标文件
+     */
+    public static void copyFile(File fromFile, File toFile) throws IOException {
+        FileInputStream ins   = new FileInputStream(fromFile);
+        FileOutputStream out   = new FileOutputStream(toFile);
+        byte[]           bytes = new byte[1024*4];
+        int              len;
+        while((len = ins.read(bytes)) != -1) {
+            out.write(bytes, 0, len);
+        }
+        ins.close();
+        out.close();
+    }
+
+
+    /**
      * 规范file地址为Uri格式(追加file://)
      * @param path 文件路径 eg: /sdcard/0/aa.jpg;
      * @return uri文件路径 eg；file:///sdcard/0/aa.jpg.
@@ -96,6 +114,8 @@ public class FileUtil {
     public static File getSplashImgDir(){
         return new File(getAppRootDir(), "/splashImg/");
     }
+
+    public static File getDownloadImgPath(){return new File(getAppRootDir(), "/downloadImage/");}
 
 
     /**

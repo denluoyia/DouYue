@@ -56,21 +56,25 @@
             android:name=".view.activity.VideoDetailActivity"
             android:launchMode="singleTop" />
 
-        <!--视频播放封装测试-->
+        <!-- 视频播放封装测试 -->
         <activity
             android:name=".view.activity.VideoTestActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <!-- 图书详情页 -->
-        <activity android:name=".view.activity.BookDetailActivity"
-            android:launchMode="singleTop"/>
+        <activity
+            android:name=".view.activity.BookDetailActivity"
+            android:launchMode="singleTop" />
 
-        <!--我的笔记-->
+        <!-- 我的笔记 -->
         <activity android:name=".view.activity.NoteActivity" />
         <activity android:name=".view.activity.NoteEditActivity" />
 
-        <!--我的收藏-->
+        <!-- 我的收藏 -->
         <activity android:name=".view.activity.MyCollectionActivity" />
         <activity android:name=".view.activity.CommonWebActivity" />
+
+        <!-- WebView图片点击浏览 -->
+        <activity android:name=".view.activity.ImageBrowseActivity"/>
 
         <!-- 音频播放服务 -->
         <service android:name=".manager.audioplayer.AudioPlayService">
@@ -78,6 +82,8 @@
                 <action android:name="com.denluoyia.douyue.Audio" />
             </intent-filter>
         </service>
+
+
     </application>
 
 </manifest>

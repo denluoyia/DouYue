@@ -80,7 +80,7 @@ public class ArticleDetailActivity extends BaseActivity implements DetailContrac
         updateTime.setText(item.getUpdate_time());
         title.setText(item.getTitle());
         author.setText(item.getAuthor());
-        ivCollect.setBackgroundResource(MyCollectionDaoManager.isCollectionExists(postId) ? R.mipmap.ic_collection : R.mipmap.ic_un_collection);
+        ivCollect.setBackgroundResource(MyCollectionDaoManager.isCollectionExists(postId) ? R.mipmap.ic_collection_selected : R.mipmap.ic_collection_un_selected);
         collectionUrl = WebViewSetting.addParams2DetailUrl(this, item.getHtml5(), false);
         mHtmlParseUtil = new HtmlParseUtil(this);
         mPresenter = new DetailPresenter(this);
@@ -177,7 +177,7 @@ public class ArticleDetailActivity extends BaseActivity implements DetailContrac
         switch (view.getId()){
             case R.id.iv_collect:
                 if (MyCollectionDaoManager.isCollectionExists(postId)){
-                    ivCollect.setBackgroundResource(R.mipmap.ic_un_collection);
+                    ivCollect.setBackgroundResource(R.mipmap.ic_collection_un_selected);
                     MyCollectionDaoManager.deleteById(postId);
                     Toast.makeText(this, "取消收藏成功", Toast.LENGTH_SHORT).show();
                     return;
@@ -190,7 +190,7 @@ public class ArticleDetailActivity extends BaseActivity implements DetailContrac
                 bean.setUrl(collectionUrl);
 
                 MyCollectionDaoManager.insert(bean);
-                ivCollect.setBackgroundResource(R.mipmap.ic_collection);
+                ivCollect.setBackgroundResource(R.mipmap.ic_collection_selected);
                 Toast.makeText(this, "收藏成功", Toast.LENGTH_SHORT).show();
                 break;
         }

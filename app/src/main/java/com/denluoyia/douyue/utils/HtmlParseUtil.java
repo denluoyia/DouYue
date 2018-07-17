@@ -14,7 +14,9 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by denluoyia
@@ -52,7 +54,7 @@ public class HtmlParseUtil {
         }
     }
 
-    private void loadHmtlString(final String htmlString){
+    private void loadHtmlString(final String htmlString){
         strThread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -111,7 +113,8 @@ public class HtmlParseUtil {
         if (type == HtmlType.URL){
             loadHtmlUrl(str);
         }else{
-            loadHmtlString(str);
+            loadHtmlString(str);
         }
     }
+
 }
