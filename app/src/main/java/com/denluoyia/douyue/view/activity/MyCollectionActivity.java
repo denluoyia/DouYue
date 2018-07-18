@@ -3,10 +3,12 @@ package com.denluoyia.douyue.view.activity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.widget.FrameLayout;
 
 import com.denluoyia.douyue.R;
 import com.denluoyia.douyue.base.BaseActivity;
+import com.denluoyia.douyue.interf.ItemTouchHelperCallback;
 import com.denluoyia.douyue.model.db.MyCollectionBean;
 import com.denluoyia.douyue.presenter.MyCollectionContract;
 import com.denluoyia.douyue.presenter.MyCollectionPresenter;
@@ -26,11 +28,10 @@ public class MyCollectionActivity extends BaseActivity implements MyCollectionCo
     RecyclerView recyclerView;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-//    @BindView(R.id.tv_edit_save)
-//    TextView tvEditSave;
 
     private MyCollectionPresenter mPresenter;
     private MyCollectionAdapter mAdapter;
+    private ItemTouchHelper mItemTouchHelper;
     NetStatusViewUtil netViewUtil;
 
     @Override
@@ -46,6 +47,9 @@ public class MyCollectionActivity extends BaseActivity implements MyCollectionCo
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new MyCollectionAdapter(this);
         recyclerView.setAdapter(mAdapter);
+        mAdapter.setOnStartDragListener(mOnStartDragListener);
+        mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(mAdapter));
+        mItemTouchHelper.attachToRecyclerView(recyclerView);
         netViewUtil = new NetStatusViewUtil(frameLayout);
         netViewUtil.statusLoading();
         mPresenter = new MyCollectionPresenter(this);
@@ -62,13 +66,12 @@ public class MyCollectionActivity extends BaseActivity implements MyCollectionCo
         mAdapter.refreshDataList(list);
     }
 
-//    @OnClick({R.id.tv_edit_save})
-//    public void onClick(View view){
-//        switch (view.getId()){
-//            case R.id.tv_edit_save:
-//                break;
-//        }
-//    }
+    private MyCollectionAdapter.OnStartDragListener mOnStartDragListener = new MyCollectionAdapter.OnStartDragListener() {
+        @Override
+        public void onStartDrag(MyCollectionAdapter.ItemViewHolder viewHolder) {
+            mItemTouchHelper.startDrag(viewHolder);
+        }
+    };
 
     @Override
     protected void onDestroy() {

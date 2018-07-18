@@ -1,7 +1,6 @@
 package com.denluoyia.douyue.constant;
 
 import com.denluoyia.douyue.R;
-import com.denluoyia.douyue.utils.StringUtil;
 import com.denluoyia.douyue.utils.UIUtil;
 
 import java.util.Arrays;
@@ -27,7 +26,7 @@ public class Constant {
     public static final int MY_COLLECTION_TYPE_AUDIO = 2;
     public static final int MY_COLLECTION_TYPE_BOOK = 3;
 
-    public static final List<String> MyCollectionTypeArray = Arrays.asList(UIUtil.getStringArray(R.array.cllection_type_array));
+    public static final List<String> MyCollectionTypeArray = Arrays.asList(UIUtil.getStringArray(R.array.collection_type_array));
 
 
 }

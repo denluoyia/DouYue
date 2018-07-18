@@ -15,6 +15,7 @@ import com.denluoyia.douyue.base.BaseActivity;
 import com.denluoyia.douyue.base.BaseFooterLoadRecyclerViewAdapter;
 import com.denluoyia.douyue.base.BaseItemViewHolder;
 import com.denluoyia.douyue.constant.Constant;
+import com.denluoyia.douyue.interf.OnItemCallbackListener;
 import com.denluoyia.douyue.model.ItemListBean;
 import com.denluoyia.douyue.utils.ItemAnimUtil;
 import com.denluoyia.douyue.view.activity.ArticleDetailActivity;
@@ -28,7 +29,7 @@ import butterknife.BindView;
  * Date 2018/06/26
  * DouYue
  */
-public class CommonItemListAdapter extends BaseFooterLoadRecyclerViewAdapter<ItemListBean.ListBean, CommonItemListAdapter.ItemViewHolder> {
+public class CommonItemListAdapter extends BaseFooterLoadRecyclerViewAdapter<ItemListBean.ListBean, CommonItemListAdapter.ItemViewHolder>{
 
     private ItemAnimUtil itemAnimUtil = new ItemAnimUtil();
 
@@ -78,9 +79,23 @@ public class CommonItemListAdapter extends BaseFooterLoadRecyclerViewAdapter<Ite
         }else{
             intent = new Intent(mContext, ArticleDetailActivity.class);
         }
+
         intent.putExtra(Constant.INTENT_ACTION_DATA_KEY, item);
         mContext.startActivity(intent);
 
+        /** 过渡转场
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            ActivityOptions options = ActivityOptions
+                    .makeSceneTransitionAnimation((Activity) mContext,view, "image");
+            mContext.startActivity(intent, options.toBundle());
+        } else {
+            //让新的Activity从一个小的范围扩大到全屏
+            ActivityOptionsCompat options = ActivityOptionsCompat
+                    .makeScaleUpAnimation(view, view.getWidth() / 2, view.getHeight() / 2, 0, 0);
+            ActivityCompat.startActivity((Activity) mContext, intent, options.toBundle());
+        }
+         */
     }
+
 }
 
