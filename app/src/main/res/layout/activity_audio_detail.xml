@@ -43,72 +43,12 @@
                     android:layout_height="wrap_content"
                     android:src="@mipmap/play_btn_play" />
             </FrameLayout>
-
-
-            <LinearLayout
-                android:id="@+id/seek_bar_bottom_tip"
+            <com.denluoyia.douyue.manager.audioplayer.MyAudioController
+                android:id="@+id/myAudioController"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dp"
                 android:layout_gravity="bottom"
-                android:orientation="vertical"
-                android:background="#30FFFFFF"
-                android:visibility="gone">
-
-                <SeekBar
-                    android:id="@+id/seek_bar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp">
-                    <TextView
-                        android:id="@+id/time_play_curr"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:id="@+id/time_play_total"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="12sp" />
-                </RelativeLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_horizontal">
-                    <!--后退-->
-                    <ImageView
-                        android:id="@+id/btn_play_prev"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@mipmap/play_btn_prev"/>
-                    <!--暂停/播放-->
-                    <ImageView
-                        android:id="@+id/btn_play_or_pause"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@mipmap/play_btn_pause"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginRight="30dp"/>
-                    <!--快进-->
-                    <ImageView
-                        android:id="@+id/btn_play_next"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@mipmap/play_btn_next"/>
-                </LinearLayout>
-            </LinearLayout>
+                android:visibility="gone"/>
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"

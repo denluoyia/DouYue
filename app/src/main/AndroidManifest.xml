@@ -56,10 +56,6 @@
             android:name=".view.activity.VideoDetailActivity"
             android:launchMode="singleTop" />
 
-        <!-- 视频播放封装测试 -->
-        <activity
-            android:name=".view.activity.VideoTestActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
         <!-- 图书详情页 -->
         <activity
             android:name=".view.activity.BookDetailActivity"

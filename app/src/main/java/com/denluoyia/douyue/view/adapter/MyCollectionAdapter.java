@@ -30,10 +30,17 @@ import butterknife.BindView;
  */
 public class MyCollectionAdapter extends BaseRecyclerViewAdapter<MyCollectionBean, MyCollectionAdapter.ItemViewHolder> implements OnItemCallbackListener {
 
+    private boolean isEditStatus = false;
+
+
     public MyCollectionAdapter(BaseActivity mActivity) {
         super(mActivity);
     }
 
+    public void refreshEditStatus(boolean isEditStatus){
+        this.isEditStatus = isEditStatus;
+        notifyDataSetChanged();
+    }
 
     @Override
     protected ItemViewHolder iCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -46,7 +53,7 @@ public class MyCollectionAdapter extends BaseRecyclerViewAdapter<MyCollectionBea
 
         holder.tvType.setText(Constant.MyCollectionTypeArray.get(item.getCollectionType()));
         holder.tvTitle.setText(item.getTitle().replace("\n", ""));
-
+        holder.ivDrag.setVisibility(isEditStatus ? View.VISIBLE : View.GONE);
         holder.ivDrag.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

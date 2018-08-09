@@ -15,7 +15,6 @@ import com.denluoyia.douyue.base.BaseActivity;
 import com.denluoyia.douyue.base.BaseFooterLoadRecyclerViewAdapter;
 import com.denluoyia.douyue.base.BaseItemViewHolder;
 import com.denluoyia.douyue.constant.Constant;
-import com.denluoyia.douyue.interf.OnItemCallbackListener;
 import com.denluoyia.douyue.model.ItemListBean;
 import com.denluoyia.douyue.utils.ItemAnimUtil;
 import com.denluoyia.douyue.view.activity.ArticleDetailActivity;

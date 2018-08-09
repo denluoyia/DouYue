@@ -20,4 +20,6 @@ public interface IAudioPlayer {
     void seekTo(int progress);
 
     void releasePlayer();
+
+
 }
