@@ -117,6 +117,8 @@ public class NoteEditActivity extends BaseActivity {
                 }
             });
         }
+
+        editTitle.requestFocus();
     }
 
 

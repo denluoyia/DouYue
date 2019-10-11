@@ -83,6 +83,13 @@ public class OkHttpClientWrap {
         }
 
 
+    /**
+     * MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+     * RequestBody body = RequestBody.create(JSON, params);
+     * @param url
+     * @param paramMap
+     * @param requestCallback
+     */
         //异步post请求
         public void post(String url, Map<String, String> paramMap, IRequestCallback requestCallback){
             RequestBody requestBody = setRequestBody(paramMap);

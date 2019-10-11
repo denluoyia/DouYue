@@ -48,6 +48,7 @@ public class RippleLayout extends LinearLayout{
         ripplePath = new Path();
         radiusAnimator = ObjectAnimator.ofFloat(this, "animValue", startValue, endValue);
         radiusAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+        radiusAnimator.setDuration(1000);
         radiusAnimator.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animator) {

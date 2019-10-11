@@ -362,4 +362,10 @@ public class BookItemBean {
             this.title = title;
         }
     }
+
+
+    @Override
+    public String toString() {
+        return "[" + this.id + ", "  + this.title + "]";
+    }
 }
